@@ -1,0 +1,33 @@
+{% extends "base.html"%}
+{% block title %}Search{% endblock %}
+
+
+
+{% block content%}
+
+<br />
+<form method="POST">
+    <textarea name="search" id="search" class="form-control" style="height:40px" placeholder="Search"></textarea>
+    <div align="center" style="padding:10px">
+        <button type="submit" name="search" id="search" class="btn btn-primary">Search</button>
+    </div>
+
+
+{% if val %}
+    <label>The searched value is conatined in</label>
+    {% for i in range(val|length-1) %}
+    {% set s = [val[i]] %}
+    <label><a href="#" onClick="searchRedirect({{s}}); return flase;"> {{val[i]}}, </a></label> 
+    {% endfor %}
+    {% set s = [val[-1]] %}
+    <label><a href="#" onClick="searchRedirect({{s}}); return false;"> {{val[-1]}} </a></label> 
+    {% if val|length == 1 %}
+    <label>category.</label>
+    {% else %}
+    <label>categories.</label>
+    {% endif %}
+{% endif %}
+
+</form>
+
+{% endblock%}

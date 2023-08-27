@@ -1,0 +1,58 @@
+{% extends "base.html"%}
+{% block title %}Home{% endblock %}
+
+
+
+{% block content%}
+
+<style>
+  #overlay {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  margin-top: 55px;
+  padding-top: 10px; /* Location of the box */
+  left: 20px;
+  top: 0;
+  width:15%; /* Full width */
+  height: 50%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(255, 0, 0); /* Fallback color */
+  background-color: rgb(255, 0, 0); /* Black w/ opacity */
+  border: 2px solid black;
+  }
+  </style>
+
+<form method="post">
+  <div id="overlay">
+    <label for="todelete">Select to delete</label><br>
+    {% for lib in user.library %}
+    <label for={{lib.name}}>{{lib.name.replace("_", " ")}}</label>
+    <input type="checkbox" id="delete" name="delete" value={{lib.name}}><br>
+    {% endfor %}
+    <button type="submit" id="delete" name="delete" class="btn btn-primary" onclick="off()">Delete</button>
+    <button type="submit" id="del" name="del" value=" " class="btn btn-primary" onclick="off()"><span aria-hidden="true">&times;</span></button>
+  </div>
+  <br>
+  <textarea name="category" id="category" class="form-control" placeholder="New Category"></textarea>
+  <br>
+  <button type="submit" name="category" id="category" class="btn btn-primary">Add New Category</button>
+  <br />
+  <br />
+  <select id="select" name="select">
+    {% for lib in user.library %}
+		  <option value={{lib.name}}>{{lib.name.replace("_", " ")}}</option>
+    {% endfor %}
+  </select>
+  <button type="submit" name="select" id="select" class="btn btn-primary">Select</button>
+  <br><br>
+</form>
+
+{% if user.library|length == 0 %}
+    <button name="del" id="del" class="btn btn-primary" onclick="Alert()">Delete</button>
+    {% else %}
+    <button name="del" id="del" class="btn btn-primary" onclick="on()">Delete</button>
+    {% endif %}
+
+
+{% endblock%}

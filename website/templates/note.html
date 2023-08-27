@@ -1,0 +1,44 @@
+{% extends "base.html"%}
+{% block title %}{{val.replace("_", " ").capitalize()}}{% endblock %}
+
+
+
+{% block content%}
+
+
+    <h1 align="center">{{val.replace("_", " ").capitalize()}}</h1>
+
+
+
+<ul class="list-group list-group-flush" id="notes">
+    {% for lib in user.library %}
+      {% if val == lib.name %}
+        {% for note in lib.notes %}
+          {% set lista = [lib.name, note.id]%}
+          <li class="list-group-item">{{ note.data }}
+              <button type="button" class="close" onClick="deleteNote({{ lista }})">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+              
+          </li>
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+</ul>
+
+<form method="POST">
+    <textarea name="note" id="note" class="form-control" placeholder="Note" onkeydown="search('mbutton')"></textarea>
+    <button id="mbutton" name="mbutton" type="submit" hidden></button>
+    <br />
+    <div align="center">
+        <button type="submit" class="btn btn-primary">Add Note</button>
+    </div>
+</form>
+
+<script>
+  if ( window.history.replaceState ) {
+      window.history.replaceState( null, null, window.location.href );
+  }
+</script>
+
+{% endblock%}
