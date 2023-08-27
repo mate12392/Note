@@ -1,5 +1,2 @@
-# flask_web_app
+# Note taking app in Flask (Work In Progress)
 
-To-do
-
-1. remember=True --> you can choose
